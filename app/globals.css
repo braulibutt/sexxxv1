@@ -140,7 +140,7 @@ h6 {
   overflow: hidden;
 }
 
-/* Estilos específicos para los resultados de la calculadora */
+/* Styles for calculator results */
 .calculator-card h4 {
   font-weight: 500;
   color: #1d1d1f;
@@ -151,7 +151,7 @@ h6 {
   font-size: 14px;
 }
 
-/* Estilo para los valores de resultados */
+/* Style for result values */
 .calculator-result-value {
   font-size: 42px;
   font-weight: 700;
@@ -161,73 +161,24 @@ h6 {
   line-height: 1.2;
 }
 
-.animation-in {
-  animation: slideInRight 0.6s ease-in-out forwards;
-}
-
-.animation-out {
-  animation: none;
-  opacity: 1;
-}
-
-/* Animaciones para el texto que se mueve en loop de izquierda a derecha */
-.slide-in-right {
-  animation: slideInLeft 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-  position: absolute;
-  left: 0;
-  right: 0;
-}
-
-.slide-out-left {
-  animation: slideOutRight 0.8s cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards;
-  position: absolute;
-  left: 0;
-  right: 0;
-}
-
-@keyframes slideInLeft {
-  0% {
-    opacity: 0;
-    transform: translateX(-60px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideOutRight {
-  0% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-  100% {
-    opacity: 0;
-    transform: translateX(60px);
-  }
-}
-
-@keyframes pulse {
-  0% {
-    opacity: 0.6;
-  }
-  50% {
-    opacity: 0.9;
-  }
-  100% {
-    opacity: 0.6;
-  }
-}
-
+/* Animation helpers */
 .animate-pulse-slow {
-  animation: pulse 5s infinite ease-in-out;
+  animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 .animate-pulse-fast {
-  animation: pulse 3s infinite ease-in-out;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-/* Animaciones para los nodos */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -237,66 +188,53 @@ h6 {
   }
 }
 
-@keyframes scaleIn {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.5);
-  }
-  70% {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1.05);
-  }
-  100% {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-  }
-}
-
 .animate-fadeIn {
   animation: fadeIn 0.8s ease-out forwards;
 }
 
-.animate-scaleIn {
-  animation: scaleIn 0.8s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+/* Text slide animations */
+.slide-in-right {
+  animation: slideInRight 0.5s ease-out forwards;
 }
 
-/* Clase específica para la animación de nodos */
-.node-animation {
-  opacity: 0;
-  animation-fill-mode: forwards;
+.slide-out-left {
+  animation: slideOutLeft 0.5s ease-in forwards;
 }
 
-/* Efecto de brillo expandido */
-.glow-effect {
-  position: relative;
-  overflow: hidden;
+@keyframes slideInRight {
+  from {
+    transform: translateX(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
-.glow-effect::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(
-    circle at center,
-    rgba(0, 124, 255, 0.4) 0%,
-    rgba(255, 107, 0, 0.3) 30%,
-    rgba(255, 255, 255, 0) 70%
-  );
-  opacity: 0.7;
-  animation: rotate-glow 8s linear infinite;
-  pointer-events: none;
-  z-index: -1;
+@keyframes slideOutLeft {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-30px);
+    opacity: 0;
+  }
 }
 
-@keyframes rotate-glow {
+/* Node animations */
+@keyframes scaleIn {
   0% {
-    transform: rotate(0deg);
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+  }
+  70% { 
+    transform: translate(-50%, -50%) scale(1.1);
   }
   100% {
-    transform: rotate(360deg);
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(var(--scale, 1));
   }
 }
 
@@ -304,46 +242,12 @@ h6 {
   background-image: radial-gradient(var(--tw-gradient-stops));
 }
 
-.from-\[\#007CFF\]\/20 {
-  --tw-gradient-from: rgba(48, 14, 242, 0.915) var(--tw-gradient-from-position);
-  --tw-gradient-to: rgba(0, 124, 255, 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+/* Default gradient colors */
+.from-blue {
+  --tw-gradient-from: #0054B4;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(0, 84, 180, 0));
 }
 
-.from-\[\#007CFF\] {
-  --tw-gradient-from: rgba(0, 124, 255, 1) var(--tw-gradient-from-position);
-  --tw-gradient-to: rgba(0, 124, 255, 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+.to-blue {
+  --tw-gradient-to: #007CFF;
 }
-
-.from-\[\#FF6B00\] {
-  --tw-gradient-from: rgba(255, 107, 0, 1) var(--tw-gradient-from-position);
-  --tw-gradient-to: rgba(255, 107, 0, 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-
-.via-\[\#007CFF\]\/30 {
-  --tw-gradient-to: rgba(0, 124, 255, 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), rgba(0, 124, 255, 0.3) var(--tw-gradient-via-position),
-    var(--tw-gradient-to);
-}
-
-.via-\[\#FF6B00\]\/20 {
-  --tw-gradient-to: rgba(255, 107, 0, 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), rgba(255, 107, 0, 0.2) var(--tw-gradient-via-position),
-    var(--tw-gradient-to);
-}
-
-.via-white {
-  --tw-gradient-to: rgb(255 255 255 / 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), #ffffff var(--tw-gradient-via-position), var(--tw-gradient-to);
-}
-
-.to-transparent {
-  --tw-gradient-to: transparent var(--tw-gradient-to-position);
-}
-
-.to-white {
-  --tw-gradient-to: #ffffff var(--tw-gradient-to-position);
-}
-
